@@ -105,6 +105,8 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_toggle(void);
 extern int sys_print_count(void);
+extern int sys_add(void);
+extern int sys_ps(void);
 extern enum trace Current_Trace;
 extern int  S_call[23];
 
@@ -134,6 +136,8 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_toggle]  sys_toggle,
 [SYS_print_count] sys_print_count,
+[SYS_add]     sys_add,
+[SYS_ps]      sys_ps,
 };
 
 void

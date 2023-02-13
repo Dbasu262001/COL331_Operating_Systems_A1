@@ -7,10 +7,38 @@
 #include "mmu.h"
 #include "proc.h"
 enum trace Current_Trace = TRACE_OFF;
-int call_count[23]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int call_count[25]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+
+
+int add(int a,int b){
+ return a +b;
+}
+//System Call Add
+int sys_add(void)
+{
+   int a,b;
+   if(argint(0,&a) <0 ||  argint(1,&b) <0){
+   return -1;
+  
+  // cprintf("%s %d\n","SYS_link",a);
+   //cprintf("%s %d\n","SYS_link",b);
+   }
+
+   return add(a,b);
+   
+}
+//System Call ps
+
+int sys_ps(void)
+{
+
+
+return 1;
+}
+
+
 // System call added by me sys_toggle
-
-
 int 
 sys_toggle(void)
 {
