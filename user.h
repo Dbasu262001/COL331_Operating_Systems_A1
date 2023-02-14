@@ -27,6 +27,9 @@ int toggle(void);
 int print_count(void);
 int add(int,int);
 int ps(void);
+int send(int, int, void*);
+int recv(void*);
+int send_multi(int,int[],void*);
 
 
 // ulib.c

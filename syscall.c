@@ -107,10 +107,13 @@ extern int sys_toggle(void);
 extern int sys_print_count(void);
 extern int sys_add(void);
 extern int sys_ps(void);
+extern int sys_send(void);
+extern int sys_recv(void);
+extern int sys_send_multi(void);
 extern enum trace Current_Trace;
 extern int  S_call[23];
 
-extern int call_count[23];
+extern int call_count[28];
 //extern static char* call_name = {
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -138,6 +141,9 @@ static int (*syscalls[])(void) = {
 [SYS_print_count] sys_print_count,
 [SYS_add]     sys_add,
 [SYS_ps]      sys_ps,
+[SYS_send]    sys_send,
+[SYS_recv]    sys_recv,
+[SYS_send_multi] sys_send_multi,
 };
 
 void

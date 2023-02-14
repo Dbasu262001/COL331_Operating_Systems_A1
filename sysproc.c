@@ -6,8 +6,53 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+
+extern int send(int sender_pid, int rec_pid, void *msg);
+extern int send_multi(int sender_pid, int rec_pids[], void *msg);
+extern int recv(void *msg);
 enum trace Current_Trace = TRACE_OFF;
-int call_count[25]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int call_count[28]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+
+int sys_send_multi(void){
+	int sender_pid;
+	char* msg;
+	int* rec_pids;
+	if(argint(0,&sender_pid) < 0 || argstr(2,&msg) < 0 || argptr(1,(void*)&rec_pids,sizeof(*rec_pids)) < 0){
+		cprintf("Invalid Arguments");
+		return -1;
+	}
+	send_multi(sender_pid,rec_pids,(void*)msg);
+
+return 0;
+}
+//Sys send function
+int sys_send(void)
+{
+	int sender_pid,rec_pid;
+	char *msg;
+	if(argint(0,&sender_pid) < 0 || argint(1,&rec_pid) <0 || argstr(2,&msg) < 0){
+		cprintf("Invalid Arguments");
+		return -1;
+	} 
+
+	send(sender_pid,rec_pid,(void*)msg);
+	return 0;
+}
+
+//SYs_recv function
+
+int sys_recv(void)
+{
+	char* msg;
+	if(argstr(0,&msg) <0){
+		cprintf("Invalid Arguments");
+ 	return -1;
+ 	}
+	
+	//if(!msg) return -1;
+	return recv((void *)msg);
+}
 
 
 
@@ -29,13 +74,6 @@ int sys_add(void)
    
 }
 //System Call ps
-
-int sys_ps(void)
-{
-
-
-return 1;
-}
 
 
 // System call added by me sys_toggle

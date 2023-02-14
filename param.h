@@ -12,3 +12,6 @@
 #define NBUF         (MAXOPBLOCKS*3)  // size of disk block cache
 #define FSSIZE       1000  // size of file system in blocks
 
+//Added by me
+#define msg_size 8 //IPC message size 8 bytes
+#define buffer_size 10  //Buffer size for each process 10 messages

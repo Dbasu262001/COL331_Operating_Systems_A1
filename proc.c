@@ -532,3 +532,81 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+
+//Sys_ps
+int sys_ps(void)
+{
+      
+	struct proc *pl;
+ 	//acquire(&ptable.lock);
+	for(pl = ptable.proc; pl < &ptable.proc[NPROC]; pl++){
+    		if(pl->state == RUNNING || pl->state == RUNNABLE || pl->state ==SLEEPING){
+    			cprintf("pid:%d name:%s\n",pl->pid,pl->name);
+    		}
+    	}
+    	//release(&ptable.lock);
+    	return 1;
+}
+
+/// 
+//Inter Process Communication
+//Unicast
+char Buffer[NPROC][10][8];
+
+int front_ind[NPROC]={0};
+int tail_ind[NPROC]={0};
+int curr_msg_total[NPROC] = {0};
+int send(int sender_pid, int rec_pid, void *msg)
+{   
+	struct proc *pr;
+	char* t = (char*) msg;
+	
+	pr = &ptable.proc[rec_pid];  
+	if(curr_msg_total[rec_pid] < 10){
+		for(int i=0;i<8;i++){
+			Buffer[rec_pid][front_ind[rec_pid]][i]=*(t+i);
+		}
+        	curr_msg_total[rec_pid]++;
+		front_ind[rec_pid] = (front_ind[rec_pid] + 1) % 10;
+		wakeup1(&pr);
+    		return 0;
+    	}	
+	return -1;
+}
+//Receive Message
+int recv(void *msg)
+{
+	int c_pid = myproc()->pid;
+	if(curr_msg_total[c_pid] == 0){	
+		return -1;
+	}else{
+	char * t = (char*)msg;
+	
+	for(int i=0;i<8;i++){
+		*(t+i)=	Buffer[c_pid][tail_ind[c_pid]][i];
+	}
+	msg =(void*)t;
+	tail_ind[c_pid] = (tail_ind[c_pid] + 1) % 10;
+	curr_msg_total[c_pid]--;
+	return 0;
+	}
+}
+
+//Multicast send 
+int send_multi(int sender_pid, int rec_pids[], void *msg)
+{	
+	for(int i=0;i<8;i++){
+	
+		if(rec_pids[i] !=-1){
+			cprintf("recid%d",rec_pids[i]);
+		 	send(sender_pid,rec_pids[i],msg);
+		 }else{
+		 	break;
+		}
+	}
+	return 0;
+}
+
+
+

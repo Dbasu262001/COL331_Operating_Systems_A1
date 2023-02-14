@@ -5,7 +5,6 @@
 # include "syscall.h"
 int main (){
 
-
-
+ps();
 exit();
 }
