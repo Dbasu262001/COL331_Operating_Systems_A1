@@ -120,10 +120,20 @@ int c_unlink  = call_count[17];
 int c_link    = call_count[18];
 int c_mkdir   = call_count[19];
 int c_close   = call_count[20];
-int c_toggle  = call_count[21];
-int c_pt_count  = call_count[22];
-/////////////////////////////////////////
+//int c_toggle  = call_count[21];
+//int c_pt_count  = call_count[22];
+int c_add     = call_count[23]; 
+int c_ps      = call_count[24];
+int c_send    = call_count[25]; 
+int c_recv    = call_count[26];   
+int c_multi_send  = call_count[27]; 
 
+
+
+/////////////////////////////////////////
+if(c_add >0){
+  cprintf("%s %d\n","SYS_add",c_add);
+}
 if(c_chdir >0){
   cprintf("%s %d\n","SYS_chdir",c_chdir);
 }
@@ -160,27 +170,40 @@ if( c_mkdir>0){
 if( c_mknod>0){
    cprintf("%s %d\n","SYS_mknod",c_mknod);
 }
+
 if(c_open >0){
    cprintf("%s %d\n","SYS_open",c_open);
 }
 if( c_pipe>0){
    cprintf("%s %d\n","SYS_pipe",c_pipe);
 }
-if( c_pt_count>0){
-   cprintf("%s %d\n","SYS_print_count",c_pt_count);
+if(c_ps >0){
+  cprintf("%s %d\n","SYS_ps",c_ps);
 }
+/*if( c_pt_count>0){
+   cprintf("%s %d\n","SYS_print_count",c_pt_count);
+}*/
 if( c_read>0){
    cprintf("%s %d\n","SYS_read",c_read);
+}
+if(c_recv >0){
+  cprintf("%s %d\n","SYS_recv",c_recv);
 }
 if( c_sbrk>0){
    cprintf("%s %d\n","SYS_sbrk",c_sbrk);
 }
+if(c_send >0){
+  cprintf("%s %d\n","SYS_send",c_send);
+}
+if(c_multi_send >0){
+  cprintf("%s %d\n","SYS_send_multi",c_multi_send);
+}
 if( c_sleep>0){
    cprintf("%s %d\n","SYS_sleep",c_sleep);
 }
-if(c_toggle >0){
+/*if(c_toggle >0){
    cprintf("%s %d\n","SYS_toggle",c_toggle);
-}
+}*/
 if( c_unlink>0){
    cprintf("%s %d\n","SYS_unlink",c_unlink);
 }
