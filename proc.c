@@ -562,10 +562,15 @@ int send(int sender_pid, int rec_pid, void *msg)
 	struct proc *pr;
 	char* t = (char*) msg;
 	
-	pr = &ptable.proc[rec_pid];  
+	pr = &ptable.proc[rec_pid];
+	if(rec_pid < 0){
+	 return -1;
+	}
 	if(curr_msg_total[rec_pid] < 10){
-		for(int i=0;i<8;i++){
-			Buffer[rec_pid][front_ind[rec_pid]][i]=*(t+i);
+		int K =0;
+		while(K<8){
+			Buffer[rec_pid][front_ind[rec_pid]][K]=*(t+K);
+			K++;
 		}
         	curr_msg_total[rec_pid]++;
 		front_ind[rec_pid] = (front_ind[rec_pid] + 1) % 10;
@@ -582,9 +587,11 @@ int recv(void *msg)
 		return -1;
 	}else{
 	char * t = (char*)msg;
+	int K =0;
 	
-	for(int i=0;i<8;i++){
-		*(t+i)=	Buffer[c_pid][tail_ind[c_pid]][i];
+	while(K < 8){
+		*(t+K)=	Buffer[c_pid][tail_ind[c_pid]][K];
+		K++;
 	}
 	msg =(void*)t;
 	tail_ind[c_pid] = (tail_ind[c_pid] + 1) % 10;
@@ -596,7 +603,8 @@ int recv(void *msg)
 //Multicast send 
 int send_multi(int sender_pid, int rec_pids[], void *msg)
 {	
-	for(int i=0;i<8;i++){
+	int i=0;
+	while(i<8){
 	
 		if(rec_pids[i] !=-1){
 			//cprintf("recid%d",rec_pids[i]);
@@ -604,6 +612,7 @@ int send_multi(int sender_pid, int rec_pids[], void *msg)
 		 }else{
 		 	break;
 		}
+		i++;
 	}
 	return 0;
 }

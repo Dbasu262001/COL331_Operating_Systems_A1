@@ -124,9 +124,9 @@ main(int argc, char *argv[])
 			float* st = (float*)malloc(8);
 			st = &sum_to;
 			char* s_msg = (char*)st;
-			int cv = (int)mean;
-			int stpp = (int) sum_to;
-			printf(1,"cv %d stpp %d \n",cv,stpp);
+			//int cv = (int)mean;
+			//int stpp = (int) sum_to;
+			//printf(1,"cv %d stpp %d \n",cv,stpp);
 			send(getpid(),my_pid,(void*)s_msg);
 			
 			exit();
@@ -159,7 +159,7 @@ main(int argc, char *argv[])
 				}
 				float* V_temp = (float*)n_msg;
 				Variance = Variance + *V_temp;
-				printf(1,"ggg %d",(int)*V_temp);
+				//printf(1,"ggg %d",(int)*V_temp);
 				
 			}			
 			Variance = Variance / (float)size;

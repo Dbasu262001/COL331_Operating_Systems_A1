@@ -82,7 +82,7 @@ sys_toggle(void)
 {
     if(Current_Trace == TRACE_OFF){
     	Current_Trace = TRACE_ON;
-    	for(int i=0;i<23;i++){
+    	for(int i=0;i<28;i++){
     	call_count[i]=0;
     	}
     }
