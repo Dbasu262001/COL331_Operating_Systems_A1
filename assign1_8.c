@@ -165,18 +165,12 @@ main(int argc, char *argv[])
 			Variance = Variance / (float)size;
 			int beg=(int)(Variance);
 			int fin=(int)(Variance*100)-beg*100;
- 			printf(1, "Variance of array for the file arr is %d.%d", beg, fin);
+ 			printf(1, "Variance of array for the file arr is %d.%d \n", beg, fin);
 			for(int i=0;i<8;i++){
 				wait();
 			}
 		}
-	
-	
-	
-	
-	
-	
-	
+		
 	
 	}
 	

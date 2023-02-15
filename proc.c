@@ -539,13 +539,13 @@ int sys_ps(void)
 {
       
 	struct proc *pl;
- 	//acquire(&ptable.lock);
+ 	
 	for(pl = ptable.proc; pl < &ptable.proc[NPROC]; pl++){
     		if(pl->state == RUNNING || pl->state == RUNNABLE || pl->state ==SLEEPING){
     			cprintf("pid:%d name:%s\n",pl->pid,pl->name);
     		}
     	}
-    	//release(&ptable.lock);
+    	
     	return 1;
 }
 

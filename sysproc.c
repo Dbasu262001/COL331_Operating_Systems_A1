@@ -66,8 +66,6 @@ int sys_add(void)
    if(argint(0,&a) <0 ||  argint(1,&b) <0){
    return -1;
   
-  // cprintf("%s %d\n","SYS_link",a);
-   //cprintf("%s %d\n","SYS_link",b);
    }
 
    return add(a,b);
