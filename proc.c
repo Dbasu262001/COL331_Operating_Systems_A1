@@ -599,7 +599,7 @@ int send_multi(int sender_pid, int rec_pids[], void *msg)
 	for(int i=0;i<8;i++){
 	
 		if(rec_pids[i] !=-1){
-			cprintf("recid%d",rec_pids[i]);
+			//cprintf("recid%d",rec_pids[i]);
 		 	send(sender_pid,rec_pids[i],msg);
 		 }else{
 		 	break;
