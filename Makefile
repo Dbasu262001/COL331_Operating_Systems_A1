@@ -185,9 +185,14 @@ UPROGS=\
 	_print_count\
 	_add\
 	_ps\
-	_send\
-	_send_multi\
-	_assign1_8\
+	_assig1_1\
+	_assig1_2\
+	_assig1_3\
+	_assig1_4\
+	_assig1_5\
+	_assig1_6\
+	_assig1_7\
+	_assig1_8\
 
 fs.img: mkfs README arr $(UPROGS)
 	./mkfs fs.img README arr $(UPROGS)
@@ -255,7 +260,7 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 # check in that version.
 
 EXTRA=\
-	user_toggle.c print_count.c add.c ps.c send.c send_multi.c assign1_8.c\
+	user_toggle.c print_count.c add.c ps.c assign1_8.c\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
 	printf.c umalloc.c\
